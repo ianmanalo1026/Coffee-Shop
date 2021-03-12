@@ -141,6 +141,6 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = 'manalo.website@gmail.com'
-EMAIL_HOST_PASSWORD = 'Soulgun21!!!'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
