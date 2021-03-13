@@ -42,11 +42,22 @@ class Item(models.Model):
     price = models.FloatField(default=get_price(), null=True, blank=True)
     slug= models.SlugField(null=True, blank=True)
     
-    def get_absolute_url(self):
-        return reverse("featured-food", kwargs={"slug": self.slug})
-    
     def __str__(self):
         return str(self.name)
+    
+    def get_absolute_url(self):
+        return reverse("featured-food", 
+                       kwargs={"slug": self.slug})
+    
+    def get_add_to_cart_url(self):
+        return reverse("add-to-cart", kwargs={
+            'slug': self.slug
+        })
+    
+    def get_remove_from_cart_url(self):
+        return reverse("remove-from-cart", kwargs={
+            'slug': self.slug
+        })
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -56,7 +67,7 @@ class Item(models.Model):
 class OrderItem(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    item_quantity = models.IntegerField()
+    item_quantity = models.IntegerField(default=1)
     ordered = models.BooleanField(default=False)
     
     def __str__(self):
@@ -67,8 +78,11 @@ class Order(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     items = models.ManyToManyField(OrderItem)
     order_date = models.DateTimeField(auto_now_add=True)
-    total_price = models.IntegerField()
-    reference_number = models.CharField(max_length=10, null=True, blank=True, unique=True, default=create_new_ref_number())
+    total_price = models.IntegerField(default=0)
+    ordered = models.BooleanField(default=False)
+    reference_number = models.CharField(max_length=10, 
+                                        null=True, blank=True, 
+                                        unique=True, default=create_new_ref_number())
     
     
     def __str__(self):
