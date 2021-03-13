@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.mixins import (LoginRequiredMixin, 
+                                        UserPassesTestMixin)
+from .models import Profile
+from django.contrib.auth import login, logout, authenticate
+from django.views.generic import ( DetailView, 
+                                  UpdateView)
 
-# Create your views here.
+
+class ProfileDetailView(LoginRequiredMixin, DetailView):
+    model = Profile
+    template_name = 'accounts/profile.html'

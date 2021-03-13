@@ -1,0 +1,17 @@
+{% extends 'account/base.html' %}
+
+{% block content %}
+{{object.name}}
+{{object.categories}}
+{{object.sizes}}
+{{object.img}}
+{{object.description}}
+{% if object.categories == 'Beverage' %}
+{{object.s_price}}
+{{object.t_price}}
+{{object.g_price}}
+{{object.v_price}}
+{% else %}
+{{object.price}}
+{% endif %}
+{% endblock%}
