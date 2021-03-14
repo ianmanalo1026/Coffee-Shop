@@ -144,6 +144,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = '/'
 
@@ -152,7 +158,6 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 ACCOUNT_SIGNUP_REDIRECT_URL = '/'
 ACCOUNT_UNIQUE_EMAIL = True
-
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = "smtp.gmail.com"
