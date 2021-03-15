@@ -17,7 +17,7 @@
                     <form method="POST" action="{{ obj.get_add_to_cart_store_page_url }}" enctype='multipart/form-data'>
                       {% csrf_token %}
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="1" id="inlineRadio1" value="{{obj.beverage_s_price|floatformat:2 }}" checked>
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="{{obj.beverage_s_price|floatformat:2 }}" checked>
                         <label class="form-check-label" for="inlineRadio1"><strong>Small </strong>₱ {{obj.beverage_s_price|floatformat:2 }}</label>
                       </div>
                       <div class="form-check form-check-inline">
@@ -32,23 +32,7 @@
                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="{{obj.beverage_v_price|floatformat:2 }}">
                         <label class="form-check-label" for="inlineRadio4"><strong>Venti </strong>₱ {{obj.beverage_v_price|floatformat:2 }}</label>
                       </div>
-                      
-                      {% endif %}
-                      {% if obj.categories == "Cake" %}
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="{{obj.cake_slice_price}}">
-                        <label class="form-check-label" for="inlineRadio5"><strong>Slice </strong>₱ {{obj.cake_slice_price|floatformat:2 }}</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio6" value="{{obj.cake_whole_price}}">
-                        <label class="form-check-label" for="inlineRadio6"><strong>Whole </strong>₱ {{obj.cake_whole_price|floatformat:2 }}</label>
-                      </div>
-                      {% endif %}
-                      {% if obj.categories != "Beverage" and obj.categories != "Cake" %}
-                      <div class="">
-                        <h6>₱ {{obj.price}}</h6>
-                      </div>
-                      {% endif %}
+
                       <div class="mt-2">
                         <small class="ml-5">Add to cart</small>
                         <button type="submit" class="btn btn-primary btn-md my-0 p"><i class="fas fa-plus"></i></a></button>
@@ -58,6 +42,7 @@
                     </form>
                 </div>
                 <hr>
+                {% endif %}
             {% endif %}
         {% endfor %}
     </div>
