@@ -55,8 +55,6 @@ def add_to_cart(request, slug):
     if order_qs.exists():
         order = order_qs[0]
         if order.items.filter(item__slug=item.slug).exists():
-            order_item.price=order.items.price
-            order_item.price.save()
             order_item.item_quantity += 1
             order_item.save()
             messages.success(request, 
@@ -121,7 +119,9 @@ def add_to_cart_store_page(request, slug):
     order_item, created = OrderItem.objects.get_or_create(
         item=item,
         customer=request.user,
-        ordered=False
+        ordered=False,
+        price=request.POST.get('inlineRadioOptions'),
+        category=item.categories,
     )
     order_qs = Order.objects.filter(customer=request.user, 
                                     ordered=False)

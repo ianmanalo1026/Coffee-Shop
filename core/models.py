@@ -33,8 +33,6 @@ def create_new_ref_number():
 class Item(models.Model):
     name = models.CharField(max_length=50)
     categories = models.CharField(choices=CATEGORY_CHOICES, max_length=50)
-    sizes = models.CharField(choices=SIZES_CHOICES, max_length=50, null=True, blank=True, default="Short")
-    cake_size = models.CharField(choices=CAKE_CHOICES, max_length=50, null=True, blank=True, default="SLICE")
     img = models.ImageField(upload_to=get_upload_path, null=True, blank=True)
     description = models.TextField()
     beverage_s_price = models.FloatField(null=True, blank=True)
